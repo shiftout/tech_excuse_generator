@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tech Excuse Generator — Late to the meeting? We've got you.</title>
+  <meta name="description" content="Generate a bulletproof corporate tech excuse for being late to (or skipping) your next meeting." />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='4' fill='%23171614'/><text x='4' y='24' font-size='22' font-family='monospace'>💀</text></svg>" />
+  <!-- Fonts -->
+  <link href="https://api.fontshare.com/v2/css?f[]=jet-brains-mono@400,700&f[]=cabinet-grotesk@400,500,700,800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="logo" aria-label="Tech Excuse Generator">
+        <svg width="36" height="36" viewBox="0 0 36 36" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+          <rect width="36" height="36" rx="6" fill="var(--color-primary)"/>
+          <rect x="6" y="10" width="24" height="16" rx="2" stroke="var(--color-bg)" stroke-width="2" fill="none"/>
+          <path d="M6 14h24" stroke="var(--color-bg)" stroke-width="1.5"/>
+          <circle cx="9" cy="12" r="1" fill="var(--color-bg)" opacity="0.6"/>
+          <circle cx="13" cy="12" r="1" fill="var(--color-bg)" opacity="0.6"/>
+          <circle cx="17" cy="12" r="1" fill="var(--color-bg)" opacity="0.6"/>
+          <path d="M11 19l3 2-3 2" stroke="var(--color-primary-highlight)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M19 23h4" stroke="var(--color-primary-highlight)" stroke-width="1.5" stroke-linecap="round"/>
+          <path d="M14 30h8M18 26v4" stroke="var(--color-bg)" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        <span class="logo-text">Tech<span class="logo-accent">Excuse</span></span>
+      </div>
+      <nav class="header-actions">
+        <button class="btn-ghost" id="historyToggle" aria-label="View excuse history" title="History">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3h18v4H3z"/><path d="M3 10h18v4H3z"/><path d="M3 17h10v4H3z"/></svg>
+        </button>
+        <button class="btn-ghost" data-theme-toggle aria-label="Switch to light mode">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="hero-inner">
+        <div class="badge">
+          <span class="badge-dot"></span>
+          <span>Corporate Survival Tool</span>
+        </div>
+        <h1 class="hero-title">
+          Late again?<br />
+          <span class="hero-accent">Blame the tech.</span>
+        </h1>
+        <p class="hero-subtitle">
+          Generate a bulletproof corporate-grade excuse for joining late, dropping off early, or just not showing up at all. Enterprise-tested. IT-approved.
+        </p>
+
+        <!-- Category Filter -->
+        <div class="category-filter" role="group" aria-label="Filter by category">
+          <button class="cat-btn active" data-cat="all">All Excuses</button>
+          <button class="cat-btn" data-cat="connectivity">Connectivity</button>
+          <button class="cat-btn" data-cat="app">Apps</button>
+          <button class="cat-btn" data-cat="device">Device</button>
+          <button class="cat-btn" data-cat="security">Security</button>
+          <button class="cat-btn" data-cat="infra">Infra / VPN</button>
+        </div>
+
+        <!-- Main CTA -->
+        <div class="cta-zone">
+          <button class="btn-generate" id="generateBtn" aria-live="polite">
+            <svg class="btn-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"/></svg>
+            Generate Excuse
+          </button>
+          <button class="btn-secondary" id="randomCatBtn" title="Random from any category">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+            Surprise Me
+          </button>
+        </div>
+
+        <!-- Excuse Card -->
+        <div class="excuse-card" id="excuseCard" aria-live="polite" aria-atomic="true">
+          <div class="excuse-card-inner" id="excuseInner">
+            <div class="excuse-placeholder">
+              <span class="terminal-cursor">_</span>
+              <span class="placeholder-text">Your excuse will appear here</span>
+            </div>
+          </div>
+          <div class="excuse-actions" id="excuseActions" style="display:none;">
+            <button class="action-btn" id="copyBtn" title="Copy to clipboard">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              Copy
+            </button>
+            <button class="action-btn" id="shareSlackBtn" title="Copy formatted for Slack">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.5 10c-.83 0-1.5-.67-1.5-1.5v-5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5v5c0 .83-.67 1.5-1.5 1.5z"/><path d="M20.5 10H19V8.5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/><path d="M9.5 14c.83 0 1.5.67 1.5 1.5v5c0 .83-.67 1.5-1.5 1.5S8 21.33 8 20.5v-5c0-.83.67-1.5 1.5-1.5z"/><path d="M3.5 14H5v1.5c0 .83-.67 1.5-1.5 1.5S2 16.33 2 15.5 2.67 14 3.5 14z"/><path d="M14 14.5c0-.83.67-1.5 1.5-1.5h5c.83 0 1.5.67 1.5 1.5s-.67 1.5-1.5 1.5h-5c-.83 0-1.5-.67-1.5-1.5z"/><path d="M15.5 19H14v1.5c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5-.67-1.5-1.5-1.5z"/><path d="M10 9.5C10 8.67 9.33 8 8.5 8h-5C2.67 8 2 8.67 2 9.5S2.67 11 3.5 11h5c.83 0 1.5-.67 1.5-1.5z"/><path d="M8.5 5H10V3.5C10 2.67 9.33 2 8.5 2S7 2.67 7 3.5 7.67 5 8.5 5z"/></svg>
+              Slack It
+            </button>
+            <button class="action-btn" id="teamsBtn" title="Copy formatted for Teams">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+              Teams
+            </button>
+            <button class="action-btn action-btn-danger" id="anotherBtn" title="Get another excuse">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-4.5"/></svg>
+              Try Again
+            </button>
+          </div>
+        </div>
+
+        <!-- Severity Indicator -->
+        <div class="severity-zone" id="severityZone" style="display:none;">
+          <div class="severity-label">Excuse Credibility</div>
+          <div class="severity-bar">
+            <div class="severity-fill" id="severityFill"></div>
+          </div>
+          <div class="severity-text" id="severityText"></div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- History Panel -->
+    <div class="history-panel" id="historyPanel" aria-hidden="true">
+      <div class="history-header">
+        <h2 class="history-title">Excuse History</h2>
+        <button class="btn-ghost" id="historyClose">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+      <div class="history-list" id="historyList">
+        <p class="history-empty">No excuses generated yet.<br/>Get to work! 😅</p>
+      </div>
+      <button class="btn-clear-history" id="clearHistory">Clear History</button>
+    </div>
+    <div class="history-overlay" id="historyOverlay"></div>
+
+    <!-- Stats Section -->
+    <section class="stats-section">
+      <div class="stats-inner">
+        <div class="stat-item">
+          <span class="stat-number" id="statTotal">0</span>
+          <span class="stat-label">Excuses Generated</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <span class="stat-number" id="statUnique">50</span>
+          <span class="stat-label">Unique Excuses</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <span class="stat-number">5</span>
+          <span class="stat-label">Categories</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <span class="stat-number">∞</span>
+          <span class="stat-label">Jobs Saved</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Categories Showcase -->
+    <section class="showcase-section">
+      <div class="showcase-inner">
+        <h2 class="section-title">Categories</h2>
+        <div class="showcase-grid">
+          <div class="showcase-card">
+            <div class="showcase-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1.05 12A11 11 0 0 1 23 12"/><path d="M4.22 19.78a13.5 13.5 0 0 1 15.56 0"/><path d="M7.5 21.75A15.87 15.87 0 0 1 12 21a15.87 15.87 0 0 1 4.5.75"/><circle cx="12" cy="12" r="1"/></svg>
+            </div>
+            <h3>Connectivity</h3>
+            <p>VPN drops, ISP outages, router reboots, and mysterious packet loss that only strikes during presentations.</p>
+          </div>
+          <div class="showcase-card">
+            <div class="showcase-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+            </div>
+            <h3>Apps &amp; Software</h3>
+            <p>Teams crashes, Citrix freezes, Outlook hangs — the classics that every IT department knows by name.</p>
+          </div>
+          <div class="showcase-card">
+            <div class="showcase-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+            </div>
+            <h3>Device</h3>
+            <p>Blue screens, forced Windows updates, webcam drivers, and microphones that refuse to cooperate.</p>
+          </div>
+          <div class="showcase-card">
+            <div class="showcase-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+            <h3>Security</h3>
+            <p>Antivirus quarantine, MFA token failures, endpoint compliance blocks — and other IT-enforced crises.</p>
+          </div>
+          <div class="showcase-card">
+            <div class="showcase-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+            </div>
+            <h3>Infra / VPN</h3>
+            <p>Proxy misconfiguration, DNS resolution failures, corporate firewall whims, and datacenter mysteries.</p>
+          </div>
+          <div class="showcase-card showcase-card-cta" id="showcaseCta">
+            <div class="showcase-icon showcase-icon-accent">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="13 2 13 9 20 9"/><path d="M20 20H4V4h9l7 7v9z"/></svg>
+            </div>
+            <h3><span id="excuseCount">47</span> Excuses Ready</h3>
+            <p>All enterprise-tested. None IT-patched. Used responsibly by professionals in 12 time zones.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Disclaimer -->
+    <section class="disclaimer-section">
+      <div class="disclaimer-inner">
+        <p class="disclaimer-text">
+          ⚠️ Built for laughs, not insubordination. Use at your own professional risk. The developers accept no liability for performance reviews, passive-aggressive calendar invites, or Slack messages from your manager starting with "Can we chat?".
+        </p>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <p>Made with 🫠 and genuine enterprise trauma &mdash; <span class="footer-hint">because the meeting could've been an email.</span></p>
+    </div>
+  </footer>
+
+  <script src="excuses.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
