@@ -20,3 +20,5 @@ A small browser-based tool for generating corporate tech excuses on demand.
 - The app uses a static excuse list in `excuses.js`.
 - Counters in the UI are updated dynamically from the excuse array.
 - Built for playful use only.
+- This project is made for fun purposes only and is not intended for serious workplace use.
+- Then again, what is left or even missing from adult life is the joy of being playful — a game, as the Situationist movement would have once said.
