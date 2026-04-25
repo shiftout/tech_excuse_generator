@@ -1,6 +1,6 @@
 # Tech Excuse Generator
 
-A small browser-based tool for generating corporate tech excuses on demand.
+A small browser-based tool for generating corporate tech excuses on demand. Hosted in https://techexcuse.com
 
 ## Files
 
